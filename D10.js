@@ -94,6 +94,15 @@ console.log(splitMe ('I love this game'));
   Crea una funzione chiamata "deleteOne" che riceve una stringa e un booleano come parametri.
   Se il valore booleano è true la funzione deve ritornare la stringa senza il primo carattere, altrimenti la deve ritornare senza l'ultimo.
 */
+function deleteOne(str, rimuovi) {
+  if(rimuovi){
+    return str.slice(1);
+  } else {
+    return str.slice(0, -1);
+  } 
+}
+console.log(deleteOne('Batman', true));
+console.log(deleteOne('Batman', false));
 
 /* ESERCIZIO 5
   Crea una funzione chiamata "onlyLetters" che riceve una stringa come parametro e la ritorna eliminando tutte le cifre numeriche.
@@ -101,9 +110,15 @@ console.log(splitMe ('I love this game'));
   Es.: onlyLetters("I have 4 dogs") => ritorna "I have dogs"
 */
 
+function onlyLetters(str) {
+  return str.replace(/[0-9]/g, '');  
+}
+console.log(onlyLetters("I have 4 dogs"));
+
 /* ESERCIZIO 6
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
+
 
 /* ESERCIZIO 7
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
@@ -122,6 +137,28 @@ console.log(splitMe ('I love this game'));
   }
 */
 
+function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+function rollTheDices(num) {
+  let values = [];
+  let sum = 0;
+
+  for (let i = 0; i < num; i++) {
+    let roll = dice();
+    values.push(roll);  
+    sum += roll;        
+  }
+
+  return {
+    sum: sum,
+    values: values
+  };
+}
+console.log(rollTheDices(3));
+console.log(rollTheDices(5));
+
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
@@ -129,7 +166,17 @@ console.log(splitMe ('I love this game'));
 /* ESERCIZIO 10
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
 */
+function isTodayMyBirthday() {
+  const myBirthday = new Date('1989-06-23');
+  const today = new Date();
 
+  if (myBirthday.getMonth() === today.getMonth() && myBirthday.getDate() === today.getDate()) {
+    return true;  
+  } else {
+    return false;  
+  }
+}
+console.log(isTodayMyBirthday());
 // Arrays & Oggetti
 
 // NOTA: l'array "movies" usato in alcuni esercizi è definito alla fine di questo file
@@ -142,14 +189,38 @@ console.log(splitMe ('I love this game'));
 /* ESERCIZIO 12
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
+function newestMovie(arr) {
+  let film = {Year: 5000}
+  arr.forEach(f => {
+    if(film.Year > f.Year) {
+      film = f
+    }
+  })
+  return film
+}
+
+console.log(newestMovie(movies))
+
 
 /* ESERCIZIO 13
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
+function countMovies(movies) {
+  return movies.length; 
+}
+const numberOfMovies = countMovies(movies);
+console.log(numberOfMovies); 
 
 /* ESERCIZIO 14
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
 */
+function onlyTheYears(movies) {
+  return movies.map(function(movie) {
+    return movie.Year; 
+  });
+}
+const years = onlyTheYears(movies);
+console.log(years);
 
 /* ESERCIZIO 15
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
