@@ -72,11 +72,13 @@ console.log(dice());
   Crea una funzione chiamata "whoIsBigger" che riceve due numeri come parametri e ritorna il maggiore dei due.
 */
 function whoIsBigger(n1, n2) {
-  if ( n1>n2){
-    return n1;
-  } else {
-    return n2;
-  }
+  // if ( n1>n2){
+  //   return n1;
+  // } else {
+  //   return n2;
+  // }
+
+  return n1>n2 ? n1 : n2
 }
 console.log(whoIsBigger(10, 23))
 
@@ -86,9 +88,12 @@ console.log(whoIsBigger(10, 23))
   Es.: splitMe("I love coding") => ritorna ["I", "Love", "Coding"]
 */
 function splitMe(stringa) {
-  return stringa.split('');
+  return stringa.split(' '); // Ricorda che lo spazio divide la stringa e inserisce i suoi elementi in un array.
 }
+
 console.log(splitMe ('I love this game'));
+
+// const splitMe = (stringa) => stringa.split(' '); Salvi in una costante la funzione e ne ritorni immediatamente il valore modificato e non salvato in variabile
 
 /* ESERCIZIO 4
   Crea una funzione chiamata "deleteOne" che riceve una stringa e un booleano come parametri.
@@ -98,8 +103,9 @@ function deleteOne(str, rimuovi) {
   if(rimuovi){
     return str.slice(1);
   } else {
-    return str.slice(0, -1);
-  } 
+    return str.slice(0, -1); // 0 mi dice di partire dalla fine della stringa e -1 di prendere l'ultima lettera della stringa e cancellarla
+  }
+  // return rimuovi ? str.slice(1) :  str.slice(0, -1); questo è una CONDIZIONE TERNARIA si può usare per sostiruire gli IF / ELSE  semplici.
 }
 console.log(deleteOne('Batman', true));
 console.log(deleteOne('Batman', false));
@@ -111,18 +117,46 @@ console.log(deleteOne('Batman', false));
 */
 
 function onlyLetters(str) {
-  return str.replace(/[0-9]/g, '');  
+   let risultato = '' // variabile locale da inserire fuori dal ciclo FOR che permette di ottenere il risultato che vogliamo
+  for (const carattere of str) {
+    // condizione che dice nelle parentesi tonde GIALLE (controlla che il numero sia compreso tra 0 e 9) davanti alla parentesi GIALLA metto il ! per dire 
+    // che voglio che la condizione si avveri quando avviene il suo contrario cioè che il suo carattere sia una lettera 
+    if(!('0' <= carattere && carattere <= '9')) // in breve la condizione mi dice se il carattere è una lettera
+      risultato += carattere
+  }
+  return risultato;  
 }
 console.log(onlyLetters("I have 4 dogs"));
 
 /* ESERCIZIO 6
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
-
+function isThisAnEmail(email) {
+  // if(!email) return console.log('Il valore inserito non esiste')
+  // const atIndex = email.indexOf('@')
+  // const dotIndex = email.indexOf('.')
+  // if(!!email[atIndex - 1] && !!email[dotIndex - 1] && !!email[dotIndex + 1] && atIndex + 1 != dotIndex) console.log(email + ' è valida')
+  //   else console.log(email + ' non è valida')
+  
+  console.log(email.includes('@') && email.includes('.') ? email + ' è un indirizzo mail valido' : email + ' non è un indirizzo mail valido')
+}
+isThisAnEmail('emanuelegardina@gmail.com')
 
 /* ESERCIZIO 7
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
 */
+function whatDayIsIt() {
+  //costante uguale alla data corrente
+  const data = new Date()
+  // la costante è un numero che indica il giorno della settimana (0 = Domenica / 6 = Sabato)
+  const giorniSettimanaNumero = data.getDay()
+  // costante uguale ad ARRAY con i giorni della settimana 
+  const giorniSettimana = ['Domenica', 'Lunedi', 'Martedi', 'Mercoledi', 'Giovedi', 'Venerdi', 'Sabato']
+  // prendo DALL'ARRAY il valore dato dall'indice GIORNISETTIMANANUMERO
+  console.log(giorniSettimana[giorniSettimanaNumero])
+}
+whatDayIsIt()
+
 
 /* ESERCIZIO 8
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
@@ -137,9 +171,9 @@ console.log(onlyLetters("I have 4 dogs"));
   }
 */
 
-function dice() {
-  return Math.floor(Math.random() * 6) + 1;
-}
+// function dice() {
+//   return Math.floor(Math.random() * 6) + 1;
+// }
 
 function rollTheDices(num) {
   let values = [];
